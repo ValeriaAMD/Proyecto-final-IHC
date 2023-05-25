@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot</title>
+  <link rel="stylesheet" type="text/css" href="estilos.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-log"></div>
+    <header>
+      <h1>Estooy para ayudarte :)</h1>
+    </header>
+    <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
+    <button class="button" id="send-btn">Enviar</button>
+  </div>
+
+  <script>
+    // Función para enviar un mensaje del usuario y recibir la respuesta del chatbot
+    function sendMessage() {
+      var userInput = $('#user-input').val();
+      $('#user-input').val('');
+
+      // Agregar el mensaje del usuario al registro del chat
+      $('#chat-log').append('<div class="user-message">' + userInput + '</div>');
+
+      // Enviar el mensaje al chatbot   
+      var chatbotResponse = getChatbotResponse(userInput);
+
+      // Agregar la respuesta del chatbot al registro del chat
+      $('#chat-log').append('<div class="chatbot-message">' + chatbotResponse + '</div>');
+
+      // Desplazar el registro del chat hacia abajo para mostrar el mensaje más reciente
+      $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
+    }
+
+    // Función para obtener la lógica de chatbot
+    function getChatbotResponse(userInput) {
+       if (userInput.includes('saludo') || userInput.includes('hola')) {
+    return '=>¡Hola! ¿En qué puedo ayudarte?';
+  } 
+  else if (userInput.includes('necesito ayuda para encontrar agencias de viajes') || userInput.includes('viajes')) {
+    return '=>Claro, estaré encantado de ayudarte. Si estás buscando información sobre destinos turísticos, alojamiento y actividades para personas mayores, te sugiero visitar TripAdvisor o el sitio web de AARP, donde encontrarás información útil para planificar tus viajes. =>Puedo ayudarte en algo mas?';
+  } 
+  else if (userInput.includes('información sobre pension a los adultos mayores') || userInput.includes('pensiones')) {
+    return '=>Por supuesto, puedo proporcionarte información sobre eso: Se otorga a todas las personas mayores de 65 años y el monto es de $4,800 pesos bimestrales. Si deseas saber más, te dejo el sitio Oficial de GOBIERNO DE MEXICO https://www.gob.mx/bienestar/acciones-y-programas/pension-para-el-bienestar-de-las-personas-adultas-mayores-296817 =>Puedo ayudarte en algo mas?';
+  } 
+  else if (userInput.includes('actividades y pasatiempos para adultos mayores') || userInput.includes('actividades')) {
+    return '=>Por supuesto, puedo proporcionarte información sobre eso: La página web de AARP (Asociación Americana de Personas Jubiladas) tiene una sección dedicada a los pasatiempos y actividades para personas mayores, donde puedes encontrar información sobre juegos, manualidades y actividades sociales. =>Puedo ayudarte en algo mas? ';
+  } 
+  else if (userInput.includes('quiero sacar una cita en el imss') || userInput.includes('imss')) {
+    return '=>Por supuesto, Ahora puedes agendar tu cita y la de tus beneficiarios con tu médico familiar en las Unidades de Medicina Familiar (UMF), te dejo un link directo que te llevará a hacer tu cita https://citamedicadigital.imss.gob.mx/CMW/inicio.jsp =>Puedo ayudarte en algo mas? ';
+  } 
+  else if (userInput.includes('salud de plantas') || userInput.includes('plantas')) {
+    return '=>Por supuesto, por la gran variedad de plantas que existe y sus diferentes cuidados te muestro un blog que puede ayudarte con eso https://verdecora.es/blog/. =>Puedo ayudarte en algo mas? ';
+  } 
+  else if (userInput.includes('tutoriales de tejido') || userInput.includes('tejidos')) {
+    return '=>Por supuesto, te muestro un link que puedes copiar en tu navegador, en este se encuentra un blog con todo lo que tienes que saber sobre los diferentes estilos de tejido y tutoriales faciles. https://www.latejeria.com/blog =>Puedo ayudarte en algo mas? ';
+  } 
+  else if (userInput.includes('gracias') || userInput.includes('adios')) {
+    return '=>¡Hasta luego! Si tienes más preguntas, no dudes en volver.';
+  } 
+  else {
+    return '=>Lo siento, no comprendo tu pregunta. ¿Podrías reformularla de manera diferente?';
+  }
+}
+
+    // Configurar el botón de enviar para que llame a la función sendMessage al hacer clic
+    $('#send-btn').on('click', function() {
+      sendMessage();
+    });
+
+    // Configurar la tecla "Enter" para que envíe el mensaje cuando se presione
+    $('#user-input').on('keydown', function(e) {
+      if (e.keyCode === 13) {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
